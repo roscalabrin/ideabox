@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 20161003200950) do
   create_table "ideas", force: :cascade do |t|
     t.text    "title"
     t.text    "body"
-    t.integer "quality_id"
+    t.integer "quality_id", default: 3
     t.index ["quality_id"], name: "index_ideas_on_quality_id", using: :btree
   end
 
   create_table "qualities", force: :cascade do |t|
-    t.text "name", default: "swill"
+    t.text "name"
   end
 
   add_foreign_key "ideas", "qualities"
