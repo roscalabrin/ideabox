@@ -12,12 +12,12 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem 'sass-rails', '~> 5.0'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.2.0'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -36,6 +36,8 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
+  gem 'selenium-webdriver'
+  gem 'pry'
 end
 
 group :production do
