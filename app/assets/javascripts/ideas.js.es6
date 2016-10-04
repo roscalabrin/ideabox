@@ -16,6 +16,8 @@ $(document).ready(function() {
       <div>
         <h4>${idea.title}</h4>
         <p>${idea.body}</p>
+        <p><em>${idea.quality}</em></p>
+        <br>
       </div>
       `)
     }).join('')
@@ -24,9 +26,9 @@ $(document).ready(function() {
   function newIdeaForm() {
     $('.new-idea-container').append(
       ` 
-        Title:<input type="text" class="new-idea-title">
-        Body:<input type="text" class="new-idea-body">
-        Quality<select class="new-idea-quality">
+        Title:<input type="text" name="title" class="new-idea-title">
+        Body:<input type="text" name="body" class="new-idea-body">
+        Quality:<select name="quality" class="new-idea-quality">
           <option value="">Select one option</option>
           <option value="genius">genius</option>
           <option value="plausible">plausible</option>
@@ -51,17 +53,17 @@ $(document).ready(function() {
       type: "POST",
       url: "api/v1/ideas",
       data: data,
-      success: function(){
-        $('input').val("");
-        getIdeas();
-      }
-    });
+      success: success
+    })
     
+    function success() {
+      $('input').val("");
+      $('.new-idea-quality').val("");
+      $('.ideas-container').empty();
+      getIdeas();
+    }
   }
   
-  
-
-
 })
 
 

@@ -6,11 +6,12 @@ class Api::V1::IdeasController < ApplicationController
   end
   
   def create
-    idea = Idea.create(
+    Idea.create(
       title: params[:title],
       body: params[:body],
       quality: params[:quality]
     )
-    respond_with idea
+
+    # respond_with Idea.last
   end
 end
