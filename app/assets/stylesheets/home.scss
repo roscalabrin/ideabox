@@ -1,7 +1,25 @@
-.title {
+.title-background {
+  margin-top: 0px;
+  margin-bottom: 0px;
   text-align: center;
+  background-image: linear-gradient(135deg, #af085c, #7003a6 78%); 
+  // background-image: url('gradient.jpg');
+  min-height: 200px;
+}
+
+.title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 60px;
+  color: white;
+  font-size: 4em;
 }
 
 .main {
   text-align: center;
 }
+
+// .new-idea {
+//   background-image: linear-gradient(146deg, #9d72f1, #8759e2);
+// }
+
