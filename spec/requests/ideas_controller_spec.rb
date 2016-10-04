@@ -8,23 +8,18 @@ RSpec.describe Api::V1::IdeasController, type: :request do
   
       get '/api/v1/ideas'
       expect(response).to be_success
-
       expect(Idea.count).to eq(2)
-    
     end
   end
   
   describe "POST #create" do
     it "returns the idea created" do
-      idea = create(:idea)
-      expect(Idea.count).to eq(1)
+      expect(Idea.count).to eq(0)
       
       post '/api/v1/ideas', {title: "New Idea", body: "idea details", quality: "genius"}
   
       expect(response).to be_success
-
-      expect(Idea.count).to eq(2)
-    
+      expect(Idea.count).to eq(1)
     end
   end
 end

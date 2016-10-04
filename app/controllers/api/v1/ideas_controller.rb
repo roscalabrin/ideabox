@@ -1,17 +1,17 @@
 class Api::V1::IdeasController < ApplicationController
-  respond_to :json
   
   def index
-    respond_with Idea.order_by_created_date
+    ideas = Idea.order_by_created_date
+    render json: ideas
   end
   
   def create
-    Idea.create(
+    idea =Idea.create(
       title: params[:title],
       body: params[:body],
       quality: params[:quality]
     )
-
-    # respond_with Idea.last
+    
+    render json: idea
   end
 end
