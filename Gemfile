@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem "turbolinks", "~> 5.x"
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'responders'
