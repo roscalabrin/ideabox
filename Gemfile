@@ -38,6 +38,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'selenium-webdriver'
   gem 'pry'
+  gem 'faker'
 end
 
 group :production do
