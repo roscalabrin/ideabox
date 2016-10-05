@@ -8,8 +8,7 @@ class Api::V1::IdeasController < ApplicationController
   def create
     idea = Idea.create(
       title: params[:title],
-      body: params[:body],
-      quality: params[:quality]
+      body: params[:body]
     )
   
     render json: idea

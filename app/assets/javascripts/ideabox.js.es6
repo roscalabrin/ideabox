@@ -4,6 +4,7 @@ class IdeaBox {
     this.ideas = new IdeasIndex()
     this.ideas.getIdeas()
     this.newIdeaForm()
+    this.addCreateListener()
     this.addDeleteListener()
     this.addEditTitleListener()
   }
@@ -13,16 +14,10 @@ class IdeaBox {
       ` 
         Title:<input type="text" name="title" class="new-idea-title">
         Body:<input type="text" name="body" class="new-idea-body">
-        Quality:<select name="quality" class="new-idea-quality">
-          <option value="">Select one option</option>
-          <option value="genius">genius</option>
-          <option value="plausible">plausible</option>
-          <option value="swill">swill</option>
-        </select>
         <button class="create-idea">Save</button>
        `
     )
-    $('.create-idea').on('click', this.createIdea);
+    // $('.create-idea').on('click', this.createIdea);
   }
 
   createIdea () {
@@ -31,32 +26,46 @@ class IdeaBox {
     var quality = $('.new-idea-quality').val();
     var idea = {
       title: title,
-      body: body,
-      quality: quality
+      body: body
     }
-    $.ajax({
-      type: "POST",
-      url: "api/v1/ideas",
-      data: idea,
-      success: response => success(response)
-    })
-  
-    function success(data) {
-      $('input').val("");
-      $('.new-idea-quality').val("");
-      
-      $('.ideas-container').prepend(
-        `<div id=${data.id} class="idea-details">
-          <h4 contenteditable="true">${title}</h4>
-          <p contenteditable="true">${body}</p>
-          <p><em>${quality}</em></p>
-          <button data-id="${data.id}" class="delete-idea">Delete</button>
-          <br>
-        </div>`
-      )
-    }
+    this.requestCreate(idea);
+    // $.ajax({
+    //   type: "POST",
+    //   url: "api/v1/ideas",
+    //   data: idea,
+    //   success: response => success(response)
+    // })
+    // 
+    // function success(data) {
+    //   $('input').val("");
+    //   $('.new-idea-quality').val("");
+    //   
+    //   $('.ideas-container').prepend(
+    //     `<div id=${data.id} class="idea-details">
+    //       <h4 contenteditable="true">${title}</h4>
+    //       <p contenteditable="true">${body}</p>
+    //       <p><em>${quality}</em></p>
+    //       <button data-id="${data.id}" class="delete-idea btn btn-default">
+    //         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    //       </button>
+    //       <button type="button" class="btn btn-default" aria-label="thumbs up">
+    //         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+    //       </button>
+    //       <button type="button" class="btn btn-default" aria-label="thumbs up">
+    //         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+    //       </button>
+    //       <br>
+    //     </div>
+    //     <br>`
+    //   )
+    // }
   }
   
+  addCreateListener () {
+    $('#parent').on('click', '.create-idea', (e) => {
+      this.createIdea()
+    })
+  }
   addDeleteListener () {
     $('#parent').on('click', '.delete-idea', (e) => {
       var ideaId = e.target.closest('.idea-details').id
@@ -89,6 +98,10 @@ class IdeaBox {
         this.requestUpdate(ideaId, "body", ideaBody)
       }
     })
+  }
+  
+  requestCreate(idea) {
+    this.request.createIdea(idea)
   }
   
   requestDelete(ideaId) {
