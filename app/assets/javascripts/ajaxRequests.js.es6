@@ -16,11 +16,11 @@ class AjaxRequest {
       type: "PUT",
       url: `api/v1/ideas/${id}`,
       data: {title: title},
-      success: response => success(response)
+      // success: response => success(response)
     })
-    function success(data) {
-
-    }
+    // function success(data) {
+    //   // console.log($(`#${data} h4`).text())
+    // }
   }
   
 }

@@ -73,6 +73,15 @@ class IdeaBox {
           this.requestUpdate(ideaId, ideaTitle)
         }    
     })
+    $('#parent').on('blur', '[contenteditable=true]', (e) => {
+        
+          var ideaId = e.target.closest('.idea-details').id
+          var ideaTitle = $(e.target).text()
+    
+          this.requestUpdate(ideaId, ideaTitle)
+    
+    })
+
   }
   
   requestDelete(ideaId) {
