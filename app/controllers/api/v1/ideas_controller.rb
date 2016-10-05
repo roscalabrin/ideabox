@@ -6,12 +6,19 @@ class Api::V1::IdeasController < ApplicationController
   end
   
   def create
-    idea =Idea.create(
+    idea = Idea.create(
       title: params[:title],
       body: params[:body],
       quality: params[:quality]
     )
-    
+  
     render json: idea
+  end
+  
+  def destroy
+    idea = Idea.find(params[:id])
+    idea.delete
+    
+    render json: idea.id
   end
 end
