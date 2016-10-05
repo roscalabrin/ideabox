@@ -11,13 +11,21 @@ class AjaxRequest {
     }
   }
   
-  updateTitle(id, type, content) {
+  updateIdea(id, type, content) {
     $.ajax({
       type: "PUT",
       url: `api/v1/ideas/${id}`,
       data: {type: type, content: content}
     })
   }
+  // updateQuality(id) {
+  //   console.log(id)
+  //   // $.ajax({
+  //   //   type: "PUT",
+  //   //   url: `api/v1/ideas/${id}`,
+  //   //   data: {type: type, content: content}
+  //   // })
+  // }
   
   createIdea(idea) {
     $.ajax({

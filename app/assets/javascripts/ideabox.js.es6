@@ -6,7 +6,9 @@ class IdeaBox {
     this.newIdeaForm()
     this.addCreateListener()
     this.addDeleteListener()
-    this.addEditTitleListener()
+    this.addEditListener()
+    this.addQualityUpListener()
+    this.addQualityDownListener()
   }
 
   newIdeaForm() {
@@ -17,7 +19,6 @@ class IdeaBox {
         <button class="create-idea">Save</button>
        `
     )
-    // $('.create-idea').on('click', this.createIdea);
   }
 
   createIdea () {
@@ -29,36 +30,6 @@ class IdeaBox {
       body: body
     }
     this.requestCreate(idea);
-    // $.ajax({
-    //   type: "POST",
-    //   url: "api/v1/ideas",
-    //   data: idea,
-    //   success: response => success(response)
-    // })
-    // 
-    // function success(data) {
-    //   $('input').val("");
-    //   $('.new-idea-quality').val("");
-    //   
-    //   $('.ideas-container').prepend(
-    //     `<div id=${data.id} class="idea-details">
-    //       <h4 contenteditable="true">${title}</h4>
-    //       <p contenteditable="true">${body}</p>
-    //       <p><em>${quality}</em></p>
-    //       <button data-id="${data.id}" class="delete-idea btn btn-default">
-    //         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-    //       </button>
-    //       <button type="button" class="btn btn-default" aria-label="thumbs up">
-    //         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-    //       </button>
-    //       <button type="button" class="btn btn-default" aria-label="thumbs up">
-    //         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-    //       </button>
-    //       <br>
-    //     </div>
-    //     <br>`
-    //   )
-    // }
   }
   
   addCreateListener () {
@@ -73,7 +44,7 @@ class IdeaBox {
     })
   }
 
-  addEditTitleListener () {
+  addEditListener () {
     $('#parent').on('keypress', '[contenteditable=true]', (e) => {
       if ( event.which === 13 ) {
         var content = e.target.tagName
@@ -100,6 +71,20 @@ class IdeaBox {
     })
   }
   
+  addQualityUpListener () {
+    $('#parent').on('click', '.glyphicon-thumbs-up', (e) => {
+      var ideaId = e.target.closest('.idea-details').id
+      this.requestUpdate(ideaId, "quality", "increase")
+    })
+  }
+  
+  addQualityDownListener () {
+    $('#parent').on('click', '.glyphicon-thumbs-down', (e) => {
+      var ideaId = e.target.closest('.idea-details').id
+      this.requestUpdate(ideaId, "quality", "decrease")
+    })
+  }
+  
   requestCreate(idea) {
     this.request.createIdea(idea)
   }
@@ -109,7 +94,11 @@ class IdeaBox {
   }
   
   requestUpdate(ideaId, contentType, content) {
-    this.request.updateTitle(ideaId, contentType, content)
+    this.request.updateIdea(ideaId, contentType, content)
+  }
+  
+  requestQuality(ideaId) {
+    this.request.updateQuality(ideaId)
   }
 
 }
