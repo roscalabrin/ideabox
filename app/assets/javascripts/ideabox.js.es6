@@ -22,10 +22,10 @@ class IdeaBox {
   }
 
   createIdea () {
-    var title = $('.new-idea-title').val();
-    var body = $('.new-idea-body').val();
-    var quality = $('.new-idea-quality').val();
-    var idea = {
+    let title = $('.new-idea-title').val();
+    let body = $('.new-idea-body').val();
+    let quality = $('.new-idea-quality').val();
+    let idea = {
       title: title,
       body: body
     }
@@ -39,7 +39,7 @@ class IdeaBox {
   }
   addDeleteListener () {
     $('#parent').on('click', '.delete-idea', (e) => {
-      var ideaId = e.target.closest('.idea-details').id
+      let ideaId = e.target.closest('.idea-details').id
       this.requestDelete(ideaId)
     })
   }
@@ -47,25 +47,25 @@ class IdeaBox {
   addEditListener () {
     $('#parent').on('keypress', '[contenteditable=true]', (e) => {
       if ( event.which === 13 ) {
-        var content = e.target.tagName
-        var ideaId = e.target.closest('.idea-details').id
+        let content = e.target.tagName
+        let ideaId = e.target.closest('.idea-details').id
         if (content === 'H4') {
-          var ideaTitle = $(e.target).text()
+          let ideaTitle = $(e.target).text()
           this.requestUpdate(ideaId, "title", ideaTitle)
         } else {
-          var ideaBody = $(e.target).text()
+          let ideaBody = $(e.target).text()
           this.requestUpdate(ideaId, "body", ideaBody)
         }
       }    
     })
     $('#parent').on('blur', '[contenteditable=true]', (e) => {
-      var content = e.target.tagName
-      var ideaId = e.target.closest('.idea-details').id
+      let content = e.target.tagName
+      let ideaId = e.target.closest('.idea-details').id
       if (content === 'H4') {
-        var ideaTitle = $(e.target).text()
+        let ideaTitle = $(e.target).text()
         this.requestUpdate(ideaId, "title", ideaTitle)
       } else {
-        var ideaBody = $(e.target).text()
+        let ideaBody = $(e.target).text()
         this.requestUpdate(ideaId, "body", ideaBody)
       }
     })
@@ -73,14 +73,14 @@ class IdeaBox {
   
   addQualityUpListener () {
     $('#parent').on('click', '.quality-up', (e) => {
-      var ideaId = e.target.closest('.idea-details').id
+      let ideaId = e.target.closest('.idea-details').id
       this.requestUpdate(ideaId, "quality", "increase")
     })
   }
   
   addQualityDownListener () {
     $('#parent').on('click', '.quality-down', (e) => {
-      var ideaId = e.target.closest('.idea-details').id
+      let ideaId = e.target.closest('.idea-details').id
       this.requestUpdate(ideaId, "quality", "decrease")
     })
   }
