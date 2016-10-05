@@ -1,5 +1,5 @@
 class Api::V1::IdeasController < ApplicationController
-  before_action :set_idea, only: [:update, :update_quality]
+  before_action :set_idea, only: [:update, :update_quality, :destroy]
   
   def index
     ideas = Idea.order_by_created_date
@@ -16,10 +16,9 @@ class Api::V1::IdeasController < ApplicationController
   end
   
   def destroy
-    idea = Idea.find(params[:id])
-    idea.delete
+    @idea.delete
     
-    render json: idea.id
+    render json: @idea.id
   end
   
   def update  
@@ -40,17 +39,9 @@ class Api::V1::IdeasController < ApplicationController
   
     def update_quality(params)
       if params[:content] == "increase"
-        @idea.update(quality: "genius") if @idea.quality == "genius"
-        @idea.update(quality: "genius") if @idea.quality == "plausible"
-        @idea.update(quality: "plausible") if @idea.quality == "swill"
+        @idea.increase_quality
       else
-        @idea.update(quality: "swill") if @idea.quality == "swill"
-        @idea.update(quality: "swill") if @idea.quality == "plausible"
-        @idea.update(quality: "plausible") if @idea.quality == "genius"
-      
-        
+        @idea.decrease_quality
       end
-      
-      # render json: @idea
     end
 end
