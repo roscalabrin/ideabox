@@ -15,17 +15,13 @@ class AjaxRequest {
     $.ajax({
       type: "PUT",
       url: `api/v1/ideas/${id}`,
-      data: {type: type, content: content}
+      data: {type: type, content: content},
+      success: response => success(response)
     })
+    function success(data) {
+      $(`#${data.id}-quality`).text(`${data.quality}`)
+    }
   }
-  // updateQuality(id) {
-  //   console.log(id)
-  //   // $.ajax({
-  //   //   type: "PUT",
-  //   //   url: `api/v1/ideas/${id}`,
-  //   //   data: {type: type, content: content}
-  //   // })
-  // }
   
   createIdea(idea) {
     $.ajax({
@@ -43,7 +39,7 @@ class AjaxRequest {
         `<div id=${data.id} class="idea-details">
           <h4 contenteditable="true">${data.title}</h4>
           <p contenteditable="true">${data.body}</p>
-          <p><em>${data.quality}</em></p>
+          <p id="${data.id}-quality"><em>${data.quality}</em></p>
           <button data-id="${data.id}" class="delete-idea btn btn-default">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </button>

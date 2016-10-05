@@ -6,14 +6,13 @@ describe "Guest can create an idea", type: :feature, js: true do
     
     fill_in "title", with: "New Idea"
     fill_in "body",  with: "this is a new idea"
-    select "genius", from: "quality"
     
     click_button "Save"
     
     within ('.ideas-container') do
       expect(page).to have_content "New Idea"
       expect(page).to have_content "this is a new idea"
-      expect(page).to have_content "genius"
+      expect(page).to have_content "swill"
     end
   end
 end

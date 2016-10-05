@@ -47,6 +47,6 @@ class Api::V1::IdeasController < ApplicationController
         @idea.update(quality: "swill") if @idea.quality == "plausible"
       end
       
-      render json: @idea
+      # render json: @idea
     end
 end

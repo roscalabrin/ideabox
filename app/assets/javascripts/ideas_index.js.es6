@@ -8,7 +8,7 @@ class IdeasIndex {
               <div id=${idea.id} class="idea-details">
                 <h4 contenteditable="true">${idea.title}</h4>
                 <p contenteditable="true">${idea.body}</p>
-                <p><em>${idea.quality}</em></p>
+                <p id="${idea.id}-quality"><em>${idea.quality}</em></p>
                 <button data-id="${idea.id}" class="delete-idea btn btn-default">
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
