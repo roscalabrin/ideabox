@@ -12,6 +12,7 @@ class IdeasIndex {
                 <button data-id="${idea.id}" class="delete-idea">Delete</button>
                 <br>
               </div>
+              <br>
               `)
             }).join('')
         );

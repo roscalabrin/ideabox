@@ -11,11 +11,11 @@ class AjaxRequest {
     }
   }
   
-  updateTitle(id, title) {
+  updateTitle(id, type, content) {
     $.ajax({
       type: "PUT",
       url: `api/v1/ideas/${id}`,
-      data: {title: title},
+      data: {type: type, content: content}
       // success: response => success(response)
     })
     // function success(data) {

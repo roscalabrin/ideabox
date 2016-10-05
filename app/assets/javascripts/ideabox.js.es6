@@ -66,30 +66,37 @@ class IdeaBox {
 
   addEditTitleListener () {
     $('#parent').on('keypress', '[contenteditable=true]', (e) => {
-        if ( event.which === 13 ) {
-          var ideaId = e.target.closest('.idea-details').id
+      if ( event.which === 13 ) {
+        var content = e.target.tagName
+        var ideaId = e.target.closest('.idea-details').id
+        if (content === 'H4') {
           var ideaTitle = $(e.target).text()
-          $(e.target).blur()
-          this.requestUpdate(ideaId, ideaTitle)
-        }    
+          this.requestUpdate(ideaId, "title", ideaTitle)
+        } else {
+          var ideaBody = $(e.target).text()
+          this.requestUpdate(ideaId, "body", ideaBody)
+        }
+      }    
     })
     $('#parent').on('blur', '[contenteditable=true]', (e) => {
-        
-          var ideaId = e.target.closest('.idea-details').id
-          var ideaTitle = $(e.target).text()
-    
-          this.requestUpdate(ideaId, ideaTitle)
-    
+      var content = e.target.tagName
+      var ideaId = e.target.closest('.idea-details').id
+      if (content === 'H4') {
+        var ideaTitle = $(e.target).text()
+        this.requestUpdate(ideaId, "title", ideaTitle)
+      } else {
+        var ideaBody = $(e.target).text()
+        this.requestUpdate(ideaId, "body", ideaBody)
+      }
     })
-
   }
   
   requestDelete(ideaId) {
     this.request.deleteIdea(ideaId)
   }
   
-  requestUpdate(ideaId, ideaTitle) {
-    this.request.updateTitle(ideaId, ideaTitle)
+  requestUpdate(ideaId, contentType, content) {
+    this.request.updateTitle(ideaId, contentType, content)
   }
 
 }
