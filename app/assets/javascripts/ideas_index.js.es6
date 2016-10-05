@@ -12,10 +12,10 @@ class IdeasIndex {
                 <button data-id="${idea.id}" class="delete-idea btn btn-default">
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-default" aria-label="thumbs up">
+                <button type="button" class="quality-up btn btn-default" aria-label="thumbs up">
                   <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-default" aria-label="thumbs up">
+                <button type="button" class="quality-down btn btn-default" aria-label="thumbs down">
                   <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
                 </button>
                 <br>

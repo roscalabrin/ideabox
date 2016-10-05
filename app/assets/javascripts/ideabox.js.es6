@@ -16,7 +16,7 @@ class IdeaBox {
       ` 
         Title:<input type="text" name="title" class="new-idea-title">
         Body:<input type="text" name="body" class="new-idea-body">
-        <button class="create-idea">Save</button>
+        <button class="create-idea btn btn-secondary">Save</button>
        `
     )
   }
@@ -72,14 +72,14 @@ class IdeaBox {
   }
   
   addQualityUpListener () {
-    $('#parent').on('click', '.glyphicon-thumbs-up', (e) => {
+    $('#parent').on('click', '.quality-up', (e) => {
       var ideaId = e.target.closest('.idea-details').id
       this.requestUpdate(ideaId, "quality", "increase")
     })
   }
   
   addQualityDownListener () {
-    $('#parent').on('click', '.glyphicon-thumbs-down', (e) => {
+    $('#parent').on('click', '.quality-down', (e) => {
       var ideaId = e.target.closest('.idea-details').id
       this.requestUpdate(ideaId, "quality", "decrease")
     })

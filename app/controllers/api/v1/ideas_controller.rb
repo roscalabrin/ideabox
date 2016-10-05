@@ -40,11 +40,15 @@ class Api::V1::IdeasController < ApplicationController
   
     def update_quality(params)
       if params[:content] == "increase"
+        @idea.update(quality: "genius") if @idea.quality == "genius"
         @idea.update(quality: "genius") if @idea.quality == "plausible"
         @idea.update(quality: "plausible") if @idea.quality == "swill"
       else
-        @idea.update(quality: "plausible") if @idea.quality == "genius"
+        @idea.update(quality: "swill") if @idea.quality == "swill"
         @idea.update(quality: "swill") if @idea.quality == "plausible"
+        @idea.update(quality: "plausible") if @idea.quality == "genius"
+      
+        
       end
       
       # render json: @idea
