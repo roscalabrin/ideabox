@@ -4,28 +4,38 @@ class IdeaBox {
     this.ideas = new IdeasIndex()
     this.ideas.getIdeas()
     this.newIdeaForm()
+    this.searchForm()
     this.addCreateListener()
     this.addDeleteListener()
     this.addEditListener()
     this.addQualityUpListener()
     this.addQualityDownListener()
+    this.addSearchListener()
   }
 
+  searchForm() {
+    $('.search-container').append(
+      ` 
+        Search: <input type="text" name="search" class="search-idea"> 
+       `
+    )
+  }
+  
   newIdeaForm() {
     $('.new-idea-container').append(
       ` 
-        Title:<input type="text" name="title" class="new-idea-title">
-        Body:<input type="text" name="body" class="new-idea-body">
+        Title: <input type="text" name="title" class="new-idea-title">
+        Body: <input type="text" name="body" class="new-idea-body">
         <button class="create-idea btn btn-secondary">Save</button>
        `
     )
   }
 
   createIdea () {
-    let title = $('.new-idea-title').val();
-    let body = $('.new-idea-body').val();
-    let quality = $('.new-idea-quality').val();
-    let idea = {
+    const title = $('.new-idea-title').val();
+    const body = $('.new-idea-body').val();
+    const quality = $('.new-idea-quality').val();
+    const idea = {
       title: title,
       body: body
     }
@@ -39,7 +49,7 @@ class IdeaBox {
   }
   addDeleteListener () {
     $('#parent').on('click', '.delete-idea', (e) => {
-      let ideaId = e.target.closest('.idea-details').id
+      const ideaId = e.target.closest('.idea-details').id
       this.requestDelete(ideaId)
     })
   }
@@ -47,25 +57,25 @@ class IdeaBox {
   addEditListener () {
     $('#parent').on('keypress', '[contenteditable=true]', (e) => {
       if ( event.which === 13 ) {
-        let content = e.target.tagName
-        let ideaId = e.target.closest('.idea-details').id
+        const content = e.target.tagName
+        const ideaId = e.target.closest('.idea-details').id
         if (content === 'H4') {
-          let ideaTitle = $(e.target).text()
+          const ideaTitle = $(e.target).text()
           this.requestUpdate(ideaId, "title", ideaTitle)
         } else {
-          let ideaBody = $(e.target).text()
+          const ideaBody = $(e.target).text()
           this.requestUpdate(ideaId, "body", ideaBody)
         }
       }    
     })
     $('#parent').on('blur', '[contenteditable=true]', (e) => {
-      let content = e.target.tagName
-      let ideaId = e.target.closest('.idea-details').id
+      const content = e.target.tagName
+      const ideaId = e.target.closest('.idea-details').id
       if (content === 'H4') {
-        let ideaTitle = $(e.target).text()
+        const ideaTitle = $(e.target).text()
         this.requestUpdate(ideaId, "title", ideaTitle)
       } else {
-        let ideaBody = $(e.target).text()
+        const ideaBody = $(e.target).text()
         this.requestUpdate(ideaId, "body", ideaBody)
       }
     })
@@ -73,15 +83,22 @@ class IdeaBox {
   
   addQualityUpListener () {
     $('#parent').on('click', '.quality-up', (e) => {
-      let ideaId = e.target.closest('.idea-details').id
+      const ideaId = e.target.closest('.idea-details').id
       this.requestUpdate(ideaId, "quality", "increase")
     })
   }
   
   addQualityDownListener () {
     $('#parent').on('click', '.quality-down', (e) => {
-      let ideaId = e.target.closest('.idea-details').id
+      const ideaId = e.target.closest('.idea-details').id
       this.requestUpdate(ideaId, "quality", "decrease")
+    })
+  }
+
+  addSearchListener () {
+    $('#parent').on('keyup', '.search-idea', (e) => {
+      const criteria = $('.search-idea').val()
+      this.request.filterIdeas(criteria)
     })
   }
   
