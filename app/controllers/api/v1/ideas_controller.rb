@@ -21,4 +21,11 @@ class Api::V1::IdeasController < ApplicationController
     
     render json: idea.id
   end
+  
+  def update
+    idea = Idea.find(params[:id])
+    idea.update(title: params[:title])
+     
+    render json: idea
+  end
 end

@@ -5,6 +5,7 @@ class IdeaBox {
     this.ideas.getIdeas()
     this.newIdeaForm()
     this.addDeleteListener()
+    this.addEditTitleListener()
   }
 
   newIdeaForm() {
@@ -45,9 +46,9 @@ class IdeaBox {
       $('.new-idea-quality').val("");
       
       $('.ideas-container').prepend(
-        `<div id=${data.id}>
-          <h4>${title}</h4>
-          <p>${body}</p>
+        `<div id=${data.id} class="idea-details">
+          <h4 contenteditable="true">${title}</h4>
+          <p contenteditable="true">${body}</p>
           <p><em>${quality}</em></p>
           <button data-id="${data.id}" class="delete-idea">Delete</button>
           <br>
@@ -57,27 +58,29 @@ class IdeaBox {
   }
   
   addDeleteListener () {
-    $('#parent').on('click', '.delete-idea', function (e) {
-      var elem = this;
-      // this.requestDelete(elem.dataset.id)
-      $.ajax({
-        type: "DELETE",
-        url: `api/v1/ideas/${elem.dataset.id}`,
-        success: response => success(response)
-      })
-      function success(data) {
-        document.getElementById(data).remove()
-      }
+    $('#parent').on('click', '.delete-idea', (e) => {
+      var ideaId = e.target.closest('.idea-details').id
+      this.requestDelete(ideaId)
     })
-    
   }
-    
-  // requestDelete(id) {
-  //   this.request.deleteIdea(id)
-  // }
+
+  addEditTitleListener () {
+    $('#parent').on('keypress', '[contenteditable=true]', (e) => {
+        if ( event.which === 13 ) {
+          var ideaId = e.target.closest('.idea-details').id
+          var ideaTitle = $(e.target).text()
+          $(e.target).blur()
+          this.requestUpdate(ideaId, ideaTitle)
+        }    
+    })
+  }
   
+  requestDelete(ideaId) {
+    this.request.deleteIdea(ideaId)
+  }
   
-  
-  
+  requestUpdate(ideaId, ideaTitle) {
+    this.request.updateTitle(ideaId, ideaTitle)
+  }
 
 }
