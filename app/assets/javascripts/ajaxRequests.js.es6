@@ -34,11 +34,23 @@ class AjaxRequest {
     function success(data) {
       $('input').val("");
       $('.new-idea-quality').val("");
-      
+      function truncateBody(body) {
+        if (body.length <= 100) {
+          return body
+        } else {
+          let newBody = ""
+          body.split(' ').forEach(function(word) {
+            if (newBody.length + word.length + 1 < 101) {
+              newBody += (word + " ")
+            }
+          })
+          return `${newBody} ...`
+        }
+      }
       $('.ideas-container').prepend(
-        `<div id=${data.id} class="idea-details">
-          <h4 contenteditable="true">${data.title}</h4>
-          <p contenteditable="true">${data.body}</p>
+        `<div id=${data.id} class="idea-details col-sm-4">
+          <h4 class="idea-title" contenteditable="true">${idea.title}</h4>
+          <p class="idea-body" contenteditable="true">${truncateBody(idea.body)}</p>
           <p id="${data.id}-quality"><em>${data.quality}</em></p>
           <button data-id="${data.id}" class="delete-idea btn btn-default">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
