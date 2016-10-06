@@ -4,7 +4,6 @@ class IdeasIndex {
       .then(function(data) {
         $('.ideas-container').append(
           data.map(idea => {
-            
             function truncateBody(body) {
               if (body.length <= 100) {
                 return body
