@@ -1,7 +1,8 @@
 class IdeaBox {
   constructor() {
     this.request = new AjaxRequest()
-    this.ideas = new IdeasIndex()
+    this.ideas   = new IdeasIndex()
+    this.search  = new SearchIndex()
     this.ideas.getIdeas()
     this.newIdeaForm()
     this.searchForm()
@@ -14,7 +15,7 @@ class IdeaBox {
   }
 
   searchForm() {
-    $('.search-container').append(
+    $('.search-form').append(
       ` 
         Search: <input type="text" name="search" class="search-idea"> 
        `
@@ -31,7 +32,7 @@ class IdeaBox {
     )
   }
 
-  createIdea () {
+  createIdea() {
     const title = $('.new-idea-title').val();
     const body = $('.new-idea-body').val();
     const quality = $('.new-idea-quality').val();
@@ -98,7 +99,7 @@ class IdeaBox {
   addSearchListener () {
     $('#parent').on('keyup', '.search-idea', (e) => {
       const criteria = $('.search-idea').val()
-      this.request.filterIdeas(criteria)
+      this.search.filterIdeas()
     })
   }
   

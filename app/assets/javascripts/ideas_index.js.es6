@@ -6,8 +6,8 @@ class IdeasIndex {
           data.map(idea => {
              return (`
               <div id=${idea.id} class="idea-details">
-                <h4 contenteditable="true">${idea.title}</h4>
-                <p contenteditable="true">${idea.body}</p>
+                <h4 class="idea-title" contenteditable="true">${idea.title}</h4>
+                <p class="idea-body" contenteditable="true">${idea.body}</p>
                 <p id="${idea.id}-quality"><em>${idea.quality}</em></p>
                 <button data-id="${idea.id}" class="delete-idea btn btn-default">
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

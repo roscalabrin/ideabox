@@ -54,8 +54,4 @@ class AjaxRequest {
     }
   }
   
-  filterIdeas(criteria) {
-    console.log(criteria)
-  }
-  
 }
