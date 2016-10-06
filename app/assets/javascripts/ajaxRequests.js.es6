@@ -36,7 +36,7 @@ class AjaxRequest {
       $('.new-idea-quality').val("");
       
       $('.ideas-container').prepend(
-        `<div id=${data.id} class="idea-details">
+        `<div id=${data.id} class="idea-details col-sm-4">
           <h4 contenteditable="true">${data.title}</h4>
           <p contenteditable="true">${data.body}</p>
           <p id="${data.id}-quality"><em>${data.quality}</em></p>

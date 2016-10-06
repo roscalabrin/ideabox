@@ -1,16 +1,30 @@
 class IdeasIndex {
-  getIdeas() {
+  getIdeas() {  
     $.getJSON('api/v1/ideas')
       .then(function(data) {
         $('.ideas-container').append(
           data.map(idea => {
-            let shortBody = $.trim(idea.body).substring(0, 10)
+            
+            function truncateBody(body) {
+              if (body.length <= 100) {
+                return body
+              } else {
+                let newBody = ""
+                body.split(' ').forEach(function(word) {
+                  if (newBody.length + word.length + 1 < 101) {
+                    newBody += (word + " ")
+                  }
+                })
+                return `${newBody} ...`
+              }
+            }
+            
              return (`
               <div id=${idea.id} class="idea-details col-sm-4">
                 <h4 class="idea-title" contenteditable="true">${idea.title}</h4>
-                <p class="idea-body-short">${shortBody} <a href="#" class="btn-more">More</a></p>
                 
-                <p class="hide idea-body" contenteditable="true">${idea.body} <a href="#" class="btn-more">Less</a>
+                <p class="idea-body" contenteditable="true">${truncateBody(idea.body)}</p>
+                
                 <p id="${idea.id}-quality"><em>${idea.quality}</em></p>
                 
                 <button data-id="${idea.id}" class="delete-idea btn btn-default">
@@ -26,17 +40,10 @@ class IdeasIndex {
                 </button>
                 <br>
               </div>
-              `)
-            }).join('')
-        );
+            `)
+          }).join('')
+        )
       })
-  }
-  
-  stringTruncate(string, length) {
-    if (string.length > length) {
-      return string.substr(0, string.lastIndexOf(' ', length)) + " ...";
-    } else {
-      return string;
-    }
+     
   }
 }

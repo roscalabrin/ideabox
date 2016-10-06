@@ -1,5 +1,4 @@
 class SearchIndex {
-  
   filterIdeas() {
     const titlesDiv = Array.from(document.getElementsByClassName('idea-details'))
     titlesDiv.map(function(idea) {
@@ -12,24 +11,6 @@ class SearchIndex {
       } else {
         $(idea).closest('.idea-details').toggleClass("hide")
       }
-      //   debugger
-      //   if ($(idea).find('.idea-body').text() === undefined) {
-      //     console.log("remove")
-      //   } else {  
-      //   }
-      // } else {  
-      // }
-      // if ($(idea).text().includes(criteria)) {
-      //   // nothing
-      // } else {
-      //     const criteria = $('.search-idea').val()
-      //     if ($(idea).text().includes(criteria)) {
-      //       // nothing
-      //     } else {
-      //     console.log($(idea))  
-      //     }
-      })
-    
-  }
-    
+    })
+  }    
 }
