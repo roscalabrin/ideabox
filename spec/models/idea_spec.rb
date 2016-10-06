@@ -15,4 +15,36 @@ describe Idea, type: :model do
 
     expect(Idea.order_by_created_date.last).to eq(old_idea)
   end
+  
+  it "quality defaults to swill upon creation" do
+    idea = create(:idea)
+    
+    expect(idea.quality).to eq "swill"
+  end
+  
+  it "increases the quality of an idea" do
+    idea = create(:idea)
+    
+    idea.increase_quality
+    expect(idea.quality).to eq "plausible"
+    
+    idea.increase_quality
+    expect(idea.quality).to eq "genius"
+    
+    idea.increase_quality
+    expect(idea.quality).to eq "genius"
+  end
+  
+  it "decreases the quality of an idea" do
+    idea = create(:idea, quality: "genius")
+    
+    idea.decrease_quality
+    expect(idea.quality).to eq "plausible"
+    
+    idea.decrease_quality
+    expect(idea.quality).to eq "swill"
+    
+    idea.decrease_quality
+    expect(idea.quality).to eq "swill"
+  end
 end
