@@ -6,7 +6,7 @@ class IdeasIndex {
           data.map(idea => {
             let shortBody = $.trim(idea.body).substring(0, 10)
              return (`
-              <div id=${idea.id} class="idea-details">
+              <div id=${idea.id} class="idea-details col-sm-4">
                 <h4 class="idea-title" contenteditable="true">${idea.title}</h4>
                 <p class="idea-body-short">${shortBody} <a href="#" class="btn-more">More</a></p>
                 
@@ -26,7 +26,6 @@ class IdeasIndex {
                 </button>
                 <br>
               </div>
-              <br>
               `)
             }).join('')
         );

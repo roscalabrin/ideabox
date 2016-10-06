@@ -1,3 +1,7 @@
+body {
+  background-color: rgba(123, 135, 151, .1);
+}
+
 .title-background {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -56,4 +60,15 @@
 
 .subtitle-add-idea {
   margin-bottom: 30px;
+}
+
+.ideas-container {
+  font-size: 1.2em;
+}
+
+.idea-details {
+  background-color: #fff;
+  border: 10px solid rgba(123, 135, 151, .1);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
