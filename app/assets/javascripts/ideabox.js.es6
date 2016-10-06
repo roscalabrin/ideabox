@@ -12,12 +12,14 @@ class IdeaBox {
     this.addQualityUpListener()
     this.addQualityDownListener()
     this.addSearchListener()
+    this.addShowLessListener()
+    this.addShowMoreListener()
   }
 
   searchForm() {
     $('.search-form').append(
       ` 
-        Search: <input type="text" name="search" class="search-idea"> 
+        Search Ideas <input type="text" name="search" class="search-idea"> 
        `
     )
   }
@@ -25,8 +27,8 @@ class IdeaBox {
   newIdeaForm() {
     $('.new-idea-container').append(
       ` 
-        Title: <input type="text" name="title" class="new-idea-title">
-        Body: <input type="text" name="body" class="new-idea-body">
+        Title <input type="text" name="title" class="new-idea-title">
+        Body <input type="text" name="body" class="new-idea-body">
         <button class="create-idea btn btn-secondary">Save</button>
        `
     )
@@ -100,6 +102,21 @@ class IdeaBox {
     $('#parent').on('keyup', '.search-idea', (e) => {
       const criteria = $('.search-idea').val()
       this.search.filterIdeas()
+    })
+  }
+  
+  addShowMoreListener () {
+    $('#parent').on('click', '.btn-more', (e) => {
+      console.log("hi")
+      $(this).parent().addClass('hide')
+      $(this).parent().siblings('.idea-body').toggleClass('hide')
+    })
+  }
+  
+  addShowLessListener () {
+    $('#parent').on('click', '.btn-less', (e) => {
+      $(this).parent().addClass('hide')
+      $(this).parent().siblings('.idea-body-short').removeClass('hide')
     })
   }
   

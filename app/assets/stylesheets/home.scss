@@ -3,8 +3,7 @@
   margin-bottom: 0px;
   text-align: center;
   background-image: linear-gradient(135deg, #af085c, #7003a6 78%); 
-  // background-image: url('gradient.jpg');
-  min-height: 200px;
+  height: 200px;
 }
 
 .title {
@@ -23,7 +22,38 @@
   display: none;
 }
 
-// .new-idea {
-//   background-image: linear-gradient(146deg, #9d72f1, #8759e2);
-// }
+.new-idea {
+  background: #250756;
+  box-shadow: inset 0px -60px 50px -60px rgba(0,0,0,0.3);
+  margin-top: -20px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: #fff;
+}
 
+.create-idea {
+  background-image: linear-gradient(135deg, #af085c 0%, #9b0848 37%, #af085c 100%);
+}
+
+.create-idea:hover {
+  color: #af085c;
+  background-image: none;
+  background-color: #f2f2f2;
+}
+
+.subtitle {
+  color: #6723e8;
+}
+
+.new-idea-container, .search-form {
+  font-size: 1.5em;
+}
+
+.new-idea-container {
+  margin-bottom: 15px;
+}
+
+.subtitle-add-idea {
+  margin-bottom: 30px;
+}
