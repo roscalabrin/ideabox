@@ -7,11 +7,12 @@ class Api::V1::IdeasController < ApplicationController
   end
   
   def create
-    idea = Idea.create(
-      title: params[:title],
-      body: params[:body]
-    )
-  
+    if (params[:title] == "") || (params[:body] == "")
+      flash[:alert] = "Invalid title or body"
+    else
+      idea = create_idea(params)
+    end
+    
     render json: idea
   end
   
@@ -47,5 +48,12 @@ class Api::V1::IdeasController < ApplicationController
       else
         @idea.decrease_quality
       end
+    end
+    
+    def create_idea(params)
+      Idea.create(
+        title: params[:title],
+        body: params[:body]
+      )
     end
 end
