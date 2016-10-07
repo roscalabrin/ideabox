@@ -15,4 +15,28 @@ describe "Guest can create an idea", type: :feature, js: true do
       expect(page).to have_content "swill"
     end
   end
+  
+  it "does not add a new idea to the page without a title" do
+    visit root_path
+    
+    fill_in "body", with: "this is a new idea"
+    
+    click_button "Save"
+    
+    within ('.ideas-container') do
+      expect(page).to_not have_content "this is a new idea"
+    end
+  end
+  
+  it "does not add a new idea to the page without a body" do
+    visit root_path
+    
+    fill_in "title", with: "New Idea"
+    
+    click_button "Save"
+    
+    within ('.ideas-container') do
+      expect(page).to_not have_content "New Idea"
+    end
+  end
 end

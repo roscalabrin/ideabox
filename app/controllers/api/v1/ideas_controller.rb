@@ -1,5 +1,5 @@
 class Api::V1::IdeasController < ApplicationController
-  before_action :set_idea, only: [:update, :update_quality, :destroy]
+  before_action :set_idea, only: [:update, :update_quality, :destroy, :show]
   
   def index
     ideas = Idea.order_by_created_date
@@ -7,12 +7,17 @@ class Api::V1::IdeasController < ApplicationController
   end
   
   def create
-    idea = Idea.create(
-      title: params[:title],
-      body: params[:body]
-    )
-  
+    if (params[:title] == "") || (params[:body] == "")
+      flash[:alert] = "Invalid title or body"
+    else
+      idea = create_idea(params)
+    end
+    
     render json: idea
+  end
+  
+  def show
+    render json: @idea.body  
   end
   
   def destroy
@@ -43,5 +48,12 @@ class Api::V1::IdeasController < ApplicationController
       else
         @idea.decrease_quality
       end
+    end
+    
+    def create_idea(params)
+      Idea.create(
+        title: params[:title],
+        body: params[:body]
+      )
     end
 end
