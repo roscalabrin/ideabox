@@ -1,6 +1,8 @@
 class Idea < ApplicationRecord
-  validates :title, presence: true
-  validates :body, presence: true
+  validates :title, {:length => { :in => 1..200 },
+                    :presence => true}
+  validates :body, {:length => { :in => 1..500 },
+                    :presence => true}
   validates :quality, inclusion: { in: %w(genius plausible swill)}
   
   def self.order_by_created_date

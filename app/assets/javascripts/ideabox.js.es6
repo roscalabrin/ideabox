@@ -12,6 +12,7 @@ class IdeaBox {
     this.addQualityUpListener()
     this.addQualityDownListener()
     this.addSearchListener()
+    this.addReloadEditListener()
   }
 
   searchForm() {
@@ -55,7 +56,22 @@ class IdeaBox {
     })
   }
 
-  addEditListener () {
+  addReloadEditListener() {
+    $('#parent').on('click', '[contenteditable=true]', function() {
+      let id = $(this).siblings('.delete-idea').data().id
+      $.ajax({
+        type: "GET",
+        url: `api/v1/ideas/${id}`,
+        data: {id: id},
+        success: response => success(response)
+      })
+      function success(data) {
+        $(`#${data.id}-quality`).text(`${data.quality}`)
+      }
+    })
+  }
+  
+  addEditListener() {
     $('#parent').on('keypress', '[contenteditable=true]', (e) => {
       if ( event.which === 13 ) {
         const content = e.target.tagName

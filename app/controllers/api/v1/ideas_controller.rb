@@ -1,5 +1,5 @@
 class Api::V1::IdeasController < ApplicationController
-  before_action :set_idea, only: [:update, :update_quality, :destroy]
+  before_action :set_idea, only: [:update, :update_quality, :destroy, :show]
   
   def index
     ideas = Idea.order_by_created_date
@@ -13,6 +13,10 @@ class Api::V1::IdeasController < ApplicationController
     )
   
     render json: idea
+  end
+  
+  def show
+    render json: @idea.body  
   end
   
   def destroy
