@@ -1,24 +1,33 @@
-# README
+# IdeaBox
+Single-page CRUD application with a Rails API.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Technologies Used
+* JavaScript
+* Ruby on Rails
+* Ajax
+* jQuery
+* TDD using RSpec, Capybara, Selenium
 
-Things you may want to cover:
+#### Functionality
+Users can:
+* add ideas
+* edit ideas
+* delete ideas
+* vote on ideas
+* search ideas
 
-* Ruby version
+#### Usage
+Link to the app [here]((https://myideabox.herokuapp.com/)
 
-* System dependencies
+To run locally:
 
-* Configuration
+Clone this repository to your local machine, cd into the project directory
 
-* Database creation
+Bundle: `bundle`
 
-* Database initialization
+Set up database: `rake db:{create,migrate}`
 
-* How to run the test suite
+Run the Server: `rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
+In your browsers, navigate to: `localhost:3000`
 
-* Deployment instructions
-
-* ...
