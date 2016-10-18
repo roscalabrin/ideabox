@@ -17,7 +17,7 @@ Users can:
 * search ideas
 
 #### Usage
-Link to the app [here]((https://myideabox.herokuapp.com/)
+Link to the app [here](https://myideabox.herokuapp.com/)
 
 To run locally:
 
