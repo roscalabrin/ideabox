@@ -74,28 +74,25 @@ class IdeaBox {
   addEditListener() {
     $('#parent').on('keypress', '[contenteditable=true]', (e) => {
       if ( event.which === 13 ) {
-        const content = e.target.tagName
-        const ideaId = e.target.closest('.idea-details').id
-        if (content === 'H4') {
-          const ideaTitle = $(e.target).text()
-          this.requestUpdate(ideaId, "title", ideaTitle)
-        } else {
-          const ideaBody = $(e.target).text()
-          this.requestUpdate(ideaId, "body", ideaBody)
-        }
-      }    
+        this.captureContent(e)  
+      } 
     })
+    
     $('#parent').on('blur', '[contenteditable=true]', (e) => {
-      const content = e.target.tagName
-      const ideaId = e.target.closest('.idea-details').id
-      if (content === 'H4') {
-        const ideaTitle = $(e.target).text()
-        this.requestUpdate(ideaId, "title", ideaTitle)
-      } else {
-        const ideaBody = $(e.target).text()
-        this.requestUpdate(ideaId, "body", ideaBody)
-      }
+      this.captureContent(e)
     })
+  }
+  
+  captureContent(e) {
+    const content = e.target.tagName
+    const ideaId = e.target.closest('.idea-details').id
+    if (content === 'H4') {
+      const ideaTitle = $(e.target).text()
+      this.requestUpdate(ideaId, "title", ideaTitle)
+    } else {
+      const ideaBody = $(e.target).text()
+      this.requestUpdate(ideaId, "body", ideaBody)
+    }
   }
   
   addQualityUpListener() {
